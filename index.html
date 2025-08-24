@@ -3,1149 +3,2192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harish's Complete 3-Month Health & Fertility Plan</title>
+    <title>Complete Fertility Transformation Dashboard</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Fertility Plan">
+    <meta name="description" content="Complete 3-month fertility transformation plan for Harish & Akhila">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon and Apple Touch Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💕</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💕</text></svg>">
+    
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            min-height: 100vh;
+            position: relative;
         }
         
-        .header {
+        /* PWA Install Banner */
+        .pwa-banner {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .pwa-banner button {
+            background: white;
+            color: #4CAF50;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 5px;
+            font-size: 12px;
+        }
+        
+        /* Navigation Header */
+        .main-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
-        .section {
-            margin-bottom: 40px;
+        .main-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .main-header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin: 20px 0 0 0;
             border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .tab-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tab-btn.harish-tab.active {
+            color: #0984e3;
+        }
+        
+        .tab-btn.akhila-tab.active {
+            color: #e91e63;
+        }
+        
+        .tab-btn.shared-tab.active {
+            color: #00b894;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Person-specific styling */
+        .harish-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+        }
+        
+        .akhila-section {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8f9fa 100%);
+        }
+        
+        .shared-section {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f8f9fa 100%);
+        }
+        
+        /* Profile Cards */
+        .profile-header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+        }
+        
+        .harish-profile::before {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+        }
+        
+        .akhila-profile::before {
+            background: linear-gradient(135deg, #ff9a9e, #e91e63);
+        }
+        
+        .shared-profile::before {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .harish-avatar {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+        }
+        
+        .akhila-avatar {
+            background: linear-gradient(135deg, #ff9a9e, #e91e63);
+        }
+        
+        .shared-avatar {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+        
+        .profile-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        /* Timeline */
+        .timeline {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            padding: 20px;
+            margin: 0 10px;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .harish-timeline .timeline-item {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+        }
+        
+        .akhila-timeline .timeline-item {
+            background: linear-gradient(135deg, #ff9a9e, #e91e63);
+            color: white;
+        }
+        
+        .shared-timeline .timeline-item {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+        }
+        
+        .timeline-month {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-goal {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Section Cards */
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             border-left: 6px solid;
+            position: relative;
         }
         
-        /* Color coding */
-        .meals { 
-            background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%); 
-            border-left-color: #4CAF50; 
-        }
-        .workouts { 
-            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); 
-            border-left-color: #2196F3; 
-        }
-        .supplements { 
-            background: linear-gradient(135deg, #fff9c4 0%, #fff3cd 100%); 
-            border-left-color: #FFEB3B; 
-        }
-        .skincare { 
-            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%); 
-            border-left-color: #E91E63; 
-        }
-        .labs { 
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); 
-            border-left-color: #FF9800; 
-        }
-        .fertility { 
-            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); 
-            border-left-color: #9C27B0; 
+        .harish-section .section {
+            border-left-color: #0984e3;
         }
         
-        h1, h2 { margin-top: 0; }
-        h2 { 
-            color: #2c3e50; 
-            border-bottom: 3px solid #3498db; 
-            padding-bottom: 10px;
-            font-size: 28px;
-        }
-        h3 { 
-            color: #34495e; 
-            margin-top: 25px;
-            font-size: 22px;
+        .akhila-section .section {
+            border-left-color: #e91e63;
         }
         
+        .shared-section .section {
+            border-left-color: #00b894;
+        }
+        
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .harish-section .section h2 {
+            color: #0984e3;
+            border-bottom-color: #0984e3;
+        }
+        
+        .akhila-section .section h2 {
+            color: #e91e63;
+            border-bottom-color: #e91e63;
+        }
+        
+        .shared-section .section h2 {
+            color: #00b894;
+            border-bottom-color: #00b894;
+        }
+        
+        /* Month Headers */
+        .month-header {
+            padding: 20px;
+            margin: 25px 0 20px 0;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .harish-section .month-header {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+        }
+        
+        .akhila-section .month-header {
+            background: linear-gradient(135deg, #ff9a9e, #e91e63);
+        }
+        
+        .shared-section .month-header {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+        
+        /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         
         th, td {
-            border: 1px solid #ddd;
             padding: 15px;
             text-align: left;
+            border-bottom: 1px solid #e0e0e0;
         }
         
         th {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: white;
-            font-weight: bold;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .harish-section th {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+        }
+        
+        .akhila-section th {
+            background: linear-gradient(135deg, #ff9a9e, #e91e63);
+        }
+        
+        .shared-section th {
+            background: linear-gradient(135deg, #00b894, #00a085);
         }
         
         tr:nth-child(even) {
             background-color: #f8f9fa;
         }
         
-        .month-header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 20px;
-            margin: 25px 0 15px 0;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        tr:hover {
+            background-color: #e3f2fd;
         }
         
+        /* Cards and Grids */
         .daily-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
+            gap: 25px;
+            margin: 25px 0;
         }
         
-        .day-card {
-            border: 2px solid #e3f2fd;
-            border-radius: 12px;
-            padding: 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+        .day-card, .meal-card {
+            border-radius: 15px;
+            padding: 25px;
+            background: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid;
         }
         
-        .day-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        .harish-section .day-card,
+        .harish-section .meal-card {
+            border-top-color: #0984e3;
+        }
+        
+        .akhila-section .day-card,
+        .akhila-section .meal-card {
+            border-top-color: #e91e63;
+        }
+        
+        .shared-section .day-card,
+        .shared-section .meal-card {
+            border-top-color: #00b894;
+        }
+        
+        .day-card:hover,
+        .meal-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
         .day-title {
+            font-size: 1.3rem;
             font-weight: bold;
-            color: #2c3e50;
             margin-bottom: 15px;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 8px;
-            font-size: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
         }
         
+        .harish-section .day-title {
+            color: #0984e3;
+            border-bottom-color: #0984e3;
+        }
+        
+        .akhila-section .day-title {
+            color: #e91e63;
+            border-bottom-color: #e91e63;
+        }
+        
+        .shared-section .day-title {
+            color: #00b894;
+            border-bottom-color: #00b894;
+        }
+        
+        /* Meal and Workout Items */
         .meal-item, .workout-item {
-            margin: 10px 0;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 14px;
+            margin: 12px 0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
             border-left: 4px solid;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
         }
         
-        .meal-item { 
-            background-color: #e8f5e8; 
+        .meal-item:hover, .workout-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .meal-item {
             border-left-color: #4CAF50;
-        }
-        .workout-item { 
-            background-color: #e3f2fd; 
-            border-left-color: #2196F3;
+            background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
         }
         
+        .workout-item {
+            border-left-color: #2196F3;
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+        }
+        
+        /* Alerts and Notifications */
         .alert {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
             border: 2px solid #ffc107;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.2);
         }
         
+        .alert strong {
+            color: #856404;
+        }
+        
+        /* Checklists */
         .checklist {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
         }
         
         .checklist li {
-            margin: 12px 0;
-            padding: 12px 15px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 6px;
-            border-left: 5px solid #28a745;
-            font-size: 15px;
+            margin: 15px 0;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .harish-section .checklist li {
+            border-left-color: #0984e3;
+        }
+        
+        .akhila-section .checklist li {
+            border-left-color: #e91e63;
+        }
+        
+        .shared-section .checklist li {
+            border-left-color: #00b894;
         }
         
         .checklist li:before {
-            content: "✓ ";
-            color: #28a745;
+            content: "✓";
             font-weight: bold;
-            font-size: 18px;
+            font-size: 1.2rem;
+            margin-right: 10px;
         }
         
-        .progress-tracker {
-            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin: 25px 0;
+        .harish-section .checklist li:before {
+            color: #0984e3;
+        }
+        
+        .akhila-section .checklist li:before {
+            color: #e91e63;
+        }
+        
+        .shared-section .checklist li:before {
+            color: #00b894;
+        }
+        
+        .checklist li:hover {
+            transform: translateX(8px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
         
-        .timeline {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 30px 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .timeline-item {
+        /* Special Elements for Akhila's fertility tracking */
+        .cycle-tracker {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
             text-align: center;
-            flex: 1;
-            padding: 15px;
-            margin: 0 10px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
         }
         
-        .timeline-month {
+        .ovulation-highlight {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
             font-weight: bold;
-            color: #2c3e50;
-            font-size: 18px;
-            margin-bottom: 8px;
+            margin: 15px 0;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
         }
         
-        .timeline-goal {
-            color: #7f8c8d;
+        .fertile-window {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            margin: 15px 0;
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
+        }
+        
+        /* Shared Meal Prep Specific Styles */
+        .person-card {
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .harish-card {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+        }
+        
+        .akhila-card {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+        }
+        
+        .meal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+        
+        /* Shopping Table Enhancements */
+        .category-produce { background-color: #e8f5e8; }
+        .category-dairy { background-color: #fff3e0; }
+        .category-grains { background-color: #f3e5f5; }
+        .category-protein { background-color: #e1f5fe; }
+        .category-spices { background-color: #ffe5b4; }
+        .category-beverages { background-color: #f1f8e9; }
+        
+        /* Offline indicator */
+        .offline-indicator {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: none;
+            z-index: 1001;
             font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .online-indicator {
+            background: #51cf66;
+        }
+        
+        /* Success Mantra Footer */
+        .success-footer {
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 20px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .harish-section .success-footer {
+            background: linear-gradient(135deg, #0984e3, #74b9ff);
+        }
+        
+        .akhila-section .success-footer {
+            background: linear-gradient(135deg, #e91e63, #ff9a9e);
+        }
+        
+        .shared-section .success-footer {
+            background: linear-gradient(135deg, #00b894, #55efc4);
+        }
+        
+        .success-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .success-stat {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .success-stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .success-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+            }
+            
+            .main-header {
+                padding: 15px;
+            }
+            
+            .main-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .tab-navigation {
+                flex-direction: column;
+                margin: 15px 0 0 0;
+            }
+            
+            .tab-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .content-section {
+                padding: 20px 15px;
+            }
+            
+            .profile-header {
+                padding: 20px;
+            }
+            
+            .profile-stats {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .daily-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .meal-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .timeline-item {
+                margin: 10px 0;
+                width: 100%;
+            }
+            
+            .success-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .success-stat {
+                min-width: 200px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .section {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+            
+            .section h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .main-header .subtitle {
+                font-size: 1rem;
+            }
+            
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 30px;
+            }
+            
+            .profile-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .timeline-month {
+                font-size: 1.2rem;
+            }
+            
+            .day-card, .meal-card {
+                padding: 20px 15px;
+            }
+            
+            .success-stat-value {
+                font-size: 1.5rem;
+            }
         }
         
         @media print {
             body { 
-                margin: 0; 
-                padding: 10px; 
                 background: white;
+                color: black;
             }
             .container {
                 box-shadow: none;
-                border-radius: 0;
+                max-width: none;
+            }
+            .pwa-banner, .offline-indicator, .tab-navigation {
+                display: none !important;
+            }
+            .content-section {
+                display: block !important;
+                page-break-before: always;
             }
             .section { 
                 page-break-inside: avoid; 
                 break-inside: avoid;
             }
-            .day-card:hover {
+            .day-card:hover, .meal-card:hover {
                 transform: none;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .daily-grid {
-                grid-template-columns: 1fr;
-            }
-            .timeline {
-                flex-direction: column;
-            }
-            .timeline-item {
-                margin: 5px 0;
-                width: 100%;
             }
         }
     </style>
 </head>
 <body>
+    <!-- PWA Install Banner -->
+    <div class="pwa-banner" id="installBanner">
+        <p>📱 Add this fertility plan to your home screen for easy access!</p>
+        <button id="installBtn">Add to Home Screen</button>
+        <button id="dismissBtn">Dismiss</button>
+    </div>
+    
+    <!-- Offline Indicator -->
+    <div class="offline-indicator" id="offlineIndicator">
+        📡 You're offline - app still works!
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>🎯 HARISH'S COMPLETE 3-MONTH TRANSFORMATION</h1>
-            <p style="font-size: 20px;"><strong>Age:</strong> 32 | <strong>Height:</strong> 5'10" | <strong>Current:</strong> 85kg | <strong>Target:</strong> 75kg</p>
-            <p style="font-size: 18px;"><strong>GOAL:</strong> Vegetarian diet + Optimal health for conception in 3 months</p>
-        </div>
-
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-month">MONTH 1</div>
-                <div class="timeline-goal">Foundation<br>3-4kg loss</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-month">MONTH 2</div>
-                <div class="timeline-goal">Optimization<br>4-5kg loss</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-month">MONTH 3</div>
-                <div class="timeline-goal">Conception<br>Target achieved</div>
-            </div>
-        </div>
-
-        <div class="section meals">
-            <h2>🥗 VEGETARIAN MEAL PLAN (3-MONTH PROGRESSION)</h2>
+        <!-- Main Header -->
+        <div class="main-header">
+            <h1>💕 Complete Fertility Transformation Dashboard</h1>
+            <p class="subtitle">Harish & Akhila's 3-Month Journey to Parenthood</p>
             
-            <div class="month-header">MONTH 1: FOUNDATION PHASE (1,950 calories/day)</div>
-            
-            <table>
-                <tr>
-                    <th style="width: 15%;">Time</th>
-                    <th style="width: 40%;">Vegetarian Food Items</th>
-                    <th style="width: 25%;">Portions</th>
-                    <th style="width: 20%;">Calories</th>
-                </tr>
-                <tr>
-                    <td><strong>6:30 AM</strong><br>Pre-workout</td>
-                    <td>Black coffee + 1 banana</td>
-                    <td>1 cup + 1 medium</td>
-                    <td>110</td>
-                </tr>
-                <tr>
-                    <td><strong>8:00 AM</strong><br>Breakfast</td>
-                    <td>
-                        • Paneer bhurji (cottage cheese scramble)<br>
-                        • 1 slice whole grain bread<br>
-                        • 1/2 avocado<br>
-                        • Green tea
-                    </td>
-                    <td>
-                        • 150g paneer<br>
-                        • 1 slice (30g)<br>
-                        • 50g<br>
-                        • 1 cup
-                    </td>
-                    <td>420</td>
-                </tr>
-                <tr>
-                    <td><strong>10:30 AM</strong><br>Mid-morning</td>
-                    <td>Mixed nuts (almonds, walnuts) + Apple</td>
-                    <td>20g nuts + 1 medium apple</td>
-                    <td>200</td>
-                </tr>
-                <tr>
-                    <td><strong>1:00 PM</strong><br>Lunch</td>
-                    <td>
-                        • Grilled tofu/paneer curry<br>
-                        • Brown rice + dal (lentils)<br>
-                        • Mixed vegetables sabzi<br>
-                        • Olive oil<br>
-                        • Cucumber raita
-                    </td>
-                    <td>
-                        • 150g protein<br>
-                        • 3/4 cup rice + 1/2 cup dal<br>
-                        • 1.5 cups<br>
-                        • 1 tbsp<br>
-                        • 1 cup
-                    </td>
-                    <td>520</td>
-                </tr>
-                <tr>
-                    <td><strong>4:00 PM</strong><br>Pre-workout</td>
-                    <td>Greek yogurt + berries + plant protein</td>
-                    <td>150g + 1/2 cup + 1/2 scoop</td>
-                    <td>220</td>
-                </tr>
-                <tr>
-                    <td><strong>7:30 PM</strong><br>Dinner</td>
-                    <td>
-                        • Grilled paneer/tempeh<br>
-                        • Quinoa<br>
-                        • Steamed broccoli & bell peppers<br>
-                        • Sweet potato<br>
-                        • Mixed green salad
-                    </td>
-                    <td>
-                        • 150g<br>
-                        • 1/2 cup cooked<br>
-                        • 1 cup<br>
-                        • 100g<br>
-                        • 2 cups
-                    </td>
-                    <td>430</td>
-                </tr>
-                <tr>
-                    <td><strong>9:30 PM</strong><br>Evening</td>
-                    <td>Herbal tea + 5 almonds</td>
-                    <td>1 cup + 5 pieces</td>
-                    <td>50</td>
-                </tr>
-            </table>
-            
-            <div class="alert">
-                <strong>Daily Totals:</strong> 1,950 calories | Protein: 140g | Carbs: 180g | Fat: 70g<br>
-                <strong>Water Goal:</strong> 3.5-4 liters throughout the day<br>
-                <strong>Key Focus:</strong> Complete vegetarian proteins from paneer, tofu, legumes, quinoa
-            </div>
-
-            <div class="month-header">MONTH 2: OPTIMIZATION PHASE (1,800 calories/day)</div>
-            <ul class="checklist">
-                <li>Reduce portions by 15% across all meals</li>
-                <li>Increase paneer to 180g at breakfast for more protein</li>
-                <li>Add plant protein powder twice daily (morning + evening)</li>
-                <li>Include intermittent fasting: 16:8 protocol 3 days/week</li>
-                <li>Add hemp seeds and chia seeds to smoothies daily</li>
-            </ul>
-
-            <div class="month-header">MONTH 3: PRE-CONCEPTION PHASE (1,850 calories/day)</div>
-            <ul class="checklist">
-                <li>Slightly increase calories to support conception readiness</li>
-                <li>Focus on fertility-boosting foods: walnuts, tomatoes, avocados</li>
-                <li>Add sprouted legumes and microgreens for extra nutrition</li>
-                <li>Include fertility-specific spices: turmeric, ginger, cinnamon</li>
-                <li>Prepare body for active conception attempts</li>
-            </ul>
-
-            <h3>Essential Vegetarian Protein Sources Daily</h3>
-            <div class="daily-grid">
-                <div class="day-card">
-                    <div class="day-title">COMPLETE PROTEINS</div>
-                    <div class="meal-item">🧀 Paneer: 300g daily (54g protein)</div>
-                    <div class="meal-item">🌱 Quinoa: 1 cup cooked (8g protein)</div>
-                    <div class="meal-item">🥤 Plant protein powder: 1.5 scoops (35g protein)</div>
-                    <div class="meal-item">🥛 Greek yogurt: 150g (15g protein)</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">COMPLEMENTARY PROTEINS</div>
-                    <div class="meal-item">🍛 Rice + Dal combination daily</div>
-                    <div class="meal-item">🥜 Nuts + Seeds: 20g mixed daily</div>
-                    <div class="meal-item">🍞 Whole grain + Nut butter</div>
-                    <div class="meal-item">🥬 Leafy greens for amino support</div>
-                </div>
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn harish-tab active" id="harish-btn">
+                    💪 Harish's Plan
+                </button>
+                <button class="tab-btn akhila-tab" id="akhila-btn">
+                    🌸 Akhila's Plan  
+                </button>
+                <button class="tab-btn shared-tab" id="shared-btn">
+                    🥗 Shared Meal Prep
+                </button>
             </div>
         </div>
 
-        <div class="section workouts">
-            <h2>💪 12-WEEK PROGRESSIVE WORKOUT PLAN</h2>
-            
-            <div class="month-header">MONTH 1: FOUNDATION BUILDING (Weeks 1-4)</div>
-            
-            <div class="daily-grid">
-                <div class="day-card">
-                    <div class="day-title">MONDAY - Upper Body Strength</div>
-                    <div class="workout-item"><strong>Warm-up:</strong> 10 min walk + dynamic stretching</div>
-                    <div class="workout-item"><strong>Push-ups (modified if needed):</strong> 3 sets x 8-12 reps</div>
-                    <div class="workout-item"><strong>Dumbbell rows:</strong> 3 sets x 10-12 reps (10-15kg)</div>
-                    <div class="workout-item"><strong>Shoulder press:</strong> 3 sets x 8-10 reps (8-12kg)</div>
-                    <div class="workout-item"><strong>Bicep curls:</strong> 3 sets x 12-15 reps</div>
-                    <div class="workout-item"><strong>Plank hold:</strong> 3 sets x 30-45 seconds</div>
-                    <div class="workout-item"><strong>Cool-down:</strong> 10 min stretching</div>
-                </div>
+        <!-- HARISH'S SECTION -->
+        <div id="harish-section" class="content-section harish-section active">
+            <!-- Profile Header -->
+            <div class="profile-header harish-profile">
+                <div class="profile-avatar harish-avatar">💪</div>
+                <h2>HARISH'S FERTILITY OPTIMIZATION PLAN</h2>
+                <p style="font-size: 1.2rem; color: #666;">Male fertility focus • Weight optimization • Strength building</p>
                 
-                <div class="day-card">
-                    <div class="day-title">TUESDAY - Cardio + Core</div>
-                    <div class="workout-item"><strong>Brisk walk/light jog:</strong> 35-40 minutes</div>
-                    <div class="workout-item"><strong>Bicycle crunches:</strong> 3 sets x 15 each side</div>
-                    <div class="workout-item"><strong>Russian twists:</strong> 3 sets x 20 total</div>
-                    <div class="workout-item"><strong>Mountain climbers:</strong> 3 sets x 30 seconds</div>
-                    <div class="workout-item"><strong>Dead bugs:</strong> 3 sets x 10 each side</div>
-                    <div class="workout-item"><strong>Stretching:</strong> 15 minutes full body</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">WEDNESDAY - Lower Body Strength</div>
-                    <div class="workout-item"><strong>Warm-up:</strong> 10 min dynamic stretching</div>
-                    <div class="workout-item"><strong>Bodyweight squats:</strong> 3 sets x 12-15 reps</div>
-                    <div class="workout-item"><strong>Walking lunges:</strong> 3 sets x 10 each leg</div>
-                    <div class="workout-item"><strong>Calf raises:</strong> 3 sets x 15-20 reps</div>
-                    <div class="workout-item"><strong>Glute bridges:</strong> 3 sets x 12-15 reps</div>
-                    <div class="workout-item"><strong>Wall sits:</strong> 3 sets x 30-45 seconds</div>
-                    <div class="workout-item"><strong>Cool-down:</strong> 10 min stretching</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">THURSDAY - Active Recovery</div>
-                    <div class="workout-item"><strong>Swimming:</strong> 30 minutes OR</div>
-                    <div class="workout-item"><strong>Cycling:</strong> 45 minutes OR</div>
-                    <div class="workout-item"><strong>Yoga class:</strong> 60 minutes</div>
-                    <div class="workout-item"><strong>Core work:</strong> 15 minutes light</div>
-                    <div class="workout-item"><strong>Meditation:</strong> 10 minutes</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">FRIDAY - Full Body Circuit</div>
-                    <div class="workout-item"><strong>Warm-up:</strong> 10 min light cardio</div>
-                    <div class="workout-item"><strong>Circuit (3 rounds, 60 sec rest between rounds):</strong></div>
-                    <div class="workout-item">• Burpees: 30 seconds</div>
-                    <div class="workout-item">• Squats: 45 seconds</div>
-                    <div class="workout-item">• Push-ups: 30 seconds</div>
-                    <div class="workout-item">• Plank: 45 seconds</div>
-                    <div class="workout-item">• Jumping jacks: 30 seconds</div>
-                    <div class="workout-item"><strong>Cool-down:</strong> 15 min stretching</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">SATURDAY - Long Cardio</div>
-                    <div class="workout-item"><strong>Nature walk/hike:</strong> 60-75 minutes OR</div>
-                    <div class="workout-item"><strong>Cycling:</strong> 60 minutes OR</div>
-                    <div class="workout-item"><strong>Swimming:</strong> 45 minutes</div>
-                    <div class="workout-item"><strong>Foam rolling:</strong> 15 minutes</div>
-                    <div class="workout-item"><strong>Relaxation:</strong> 20 minutes</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">SUNDAY - Complete Rest</div>
-                    <div class="workout-item"><strong>Gentle stretching:</strong> 20 minutes</div>
-                    <div class="workout-item"><strong>Meal prep:</strong> 2 hours</div>
-                    <div class="workout-item"><strong>Recovery activities:</strong> Reading, massage</div>
-                    <div class="workout-item"><strong>Planning:</strong> Week ahead preparation</div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">32</div>
+                        <div class="stat-label">Years Old</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">5'10"</div>
+                        <div class="stat-label">Height</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">85 → 75kg</div>
+                        <div class="stat-label">Weight Goal</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1,950 cal</div>
+                        <div class="stat-label">Daily Intake</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">140g</div>
+                        <div class="stat-label">Daily Protein</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="month-header">MONTH 2: INTERMEDIATE PROGRESSION (Weeks 5-8)</div>
-            <ul class="checklist">
-                <li>Increase weights by 15-20% for all strength exercises</li>
-                <li>Add 4th set to major compound movements</li>
-                <li>Increase cardio duration to 45-50 minutes</li>
-                <li>Add deadlifts and overhead press with proper form</li>
-                <li>Include 2 HIIT sessions per week (20 minutes each)</li>
-                <li>Focus on progressive overload principles</li>
-            </ul>
-
-            <div class="month-header">MONTH 3: ADVANCED PHASE (Weeks 9-12)</div>
-            <ul class="checklist">
-                <li>Progressive overload: increase weight/reps weekly</li>
-                <li>Add compound movements: weighted squats, deadlifts</li>
-                <li>Include 2 HIIT sessions per week (25 minutes each)</li>
-                <li>Focus on functional movements for daily life</li>
-                <li>Track performance metrics and strength gains</li>
-                <li>Prepare for maintenance phase post-conception</li>
-            </ul>
-        </div>
-
-        <div class="section supplements">
-            <h2>💊 COMPLETE SUPPLEMENT SCHEDULE</h2>
-            
-            <table>
-                <tr>
-                    <th>Supplement</th>
-                    <th>Dose</th>
-                    <th>Timing</th>
-                    <th>Primary Purpose</th>
-                    <th>Special Notes</th>
-                </tr>
-                <tr>
-                    <td><strong>Men's Multivitamin</strong></td>
-                    <td>1 tablet</td>
-                    <td>With breakfast</td>
-                    <td>General health, nutrient gaps</td>
-                    <td>Choose one with folate, not folic acid</td>
-                </tr>
-                <tr>
-                    <td><strong>Vitamin B12</strong></td>
-                    <td>250 mcg</td>
-                    <td>With breakfast</td>
-                    <td>Energy, nervous system, fertility</td>
-                    <td><strong>Essential for vegetarians</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>Algae-based Omega-3</strong></td>
-                    <td>1000mg (EPA 300mg + DHA 500mg)</td>
-                    <td>With lunch</td>
-                    <td>Heart health, sperm quality</td>
-                    <td>Vegetarian source from algae</td>
-                </tr>
-                <tr>
-                    <td><strong>Vitamin D3</strong></td>
-                    <td>2000-4000 IU</td>
-                    <td>With breakfast</td>
-                    <td>Testosterone, bone health</td>
-                    <td>Test levels first, adjust dose</td>
-                </tr>
-                <tr>
-                    <td><strong>Zinc Picolinate</strong></td>
-                    <td>15mg</td>
-                    <td>Before bed (empty stomach)</td>
-                    <td>Testosterone, sperm health</td>
-                    <td>Don't take with calcium/iron</td>
-                </tr>
-                <tr>
-                    <td><strong>CoQ10 (Ubiquinol)</strong></td>
-                    <td>100mg</td>
-                    <td>With dinner</td>
-                    <td>Sperm motility, cellular energy</td>
-                    <td>Ubiquinol form preferred</td>
-                </tr>
-                <tr>
-                    <td><strong>Vitamin C</strong></td>
-                    <td>500mg</td>
-                    <td>With lunch</td>
-                    <td>Antioxidant, sperm health</td>
-                    <td>Helps iron absorption</td>
-                </tr>
-                <tr>
-                    <td><strong>Lycopene</strong></td>
-                    <td>10-15mg</td>
-                    <td>With dinner</td>
-                    <td>Prostate health, fertility</td>
-                    <td>Better absorbed with fats</td>
-                </tr>
-                <tr>
-                    <td><strong>Magnesium Glycinate</strong></td>
-                    <td>400mg</td>
-                    <td>Before bed</td>
-                    <td>Sleep, muscle recovery</td>
-                    <td>Helps with sleep quality</td>
-                </tr>
-                <tr>
-                    <td><strong>Ashwagandha (KSM-66)</strong></td>
-                    <td>300mg</td>
-                    <td>With dinner</td>
-                    <td>Stress reduction, testosterone</td>
-                    <td>KSM-66 extract most effective</td>
-                </tr>
-                <tr>
-                    <td><strong>Probiotics</strong></td>
-                    <td>10-20 billion CFU</td>
-                    <td>With breakfast</td>
-                    <td>Gut health, immunity</td>
-                    <td>Multi-strain formula</td>
-                </tr>
-                <tr>
-                    <td><strong>Iron (if deficient)</strong></td>
-                    <td>18mg</td>
-                    <td>With vitamin C, away from tea</td>
-                    <td>Energy, oxygen transport</td>
-                    <td><strong>Test levels first</strong></td>
-                </tr>
-            </table>
-            
-            <div class="alert">
-                <strong>Vegetarian-Specific Notes:</strong><br>
-                • <strong>B12 is crucial</strong> - vegetarians are at high risk of deficiency<br>
-                • <strong>Iron absorption:</strong> Take with vitamin C, avoid with tea/coffee<br>
-                • <strong>Algae omega-3:</strong> Only reliable vegetarian source of EPA/DHA<br>
-                • <strong>Start gradually:</strong> Introduce 2-3 supplements per week<br>
-                • <strong>Monthly cost:</strong> ₹4,000-6,000 total
-            </div>
-
-            <h3>3-Month Supplement Timeline</h3>
-            <div class="daily-grid">
-                <div class="day-card">
-                    <div class="day-title">MONTH 1: Foundation</div>
-                    <div class="meal-item">Start with multivitamin, B12, D3</div>
-                    <div class="meal-item">Add omega-3 and vitamin C</div>
-                    <div class="meal-item">Get baseline blood tests</div>
-                    <div class="meal-item">Monitor energy and sleep</div>
+            <!-- Timeline -->
+            <div class="timeline harish-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-month">MONTH 1</div>
+                    <div class="timeline-goal">Foundation<br>3-4kg loss</div>
                 </div>
-                
-                <div class="day-card">
-                    <div class="day-title">MONTH 2: Optimization</div>
-                    <div class="meal-item">Add zinc, magnesium, CoQ10</div>
-                    <div class="meal-item">Include ashwagandha for stress</div>
-                    <div class="meal-item">Add probiotics for gut health</div>
-                    <div class="meal-item">Assess supplement effectiveness</div>
+                <div class="timeline-item">
+                    <div class="timeline-month">MONTH 2</div>
+                    <div class="timeline-goal">Optimization<br>4-5kg loss</div>
                 </div>
-                
-                <div class="day-card">
-                    <div class="day-title">MONTH 3: Peak Performance</div>
-                    <div class="meal-item">Full supplement routine established</div>
-                    <div class="meal-item">Add lycopene for fertility</div>
-                    <div class="meal-item">Fine-tune doses based on labs</div>
-                    <div class="meal-item">Prepare for conception phase</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section labs">
-            <h2>🔬 COMPREHENSIVE LAB TESTING GUIDE</h2>
-            
-            <div class="month-header">MONTH 1: BASELINE TESTING (Week 2)</div>
-            
-            <table>
-                <tr>
-                    <th>Test Category</th>
-                    <th>Specific Tests</th>
-                    <th>Normal Range</th>
-                    <th>Optimal Range</th>
-                    <th>Action if Abnormal</th>
-                </tr>
-                <tr>
-                    <td rowspan="3"><strong>Basic Health Panel</strong></td>
-                    <td>Complete Blood Count (CBC)</td>
-                    <td>Hemoglobin: 13.5-17.5 g/dL</td>
-                    <td>14-16 g/dL</td>
-                    <td>Iron supplementation if low</td>
-                </tr>
-                <tr>
-                    <td>Comprehensive Metabolic Panel</td>
-                    <td>Glucose: 70-100 mg/dL</td>
-                    <td>80-90 mg/dL</td>
-                    <td>Diet modification if elevated</td>
-                </tr>
-                <tr>
-                    <td>Lipid Profile</td>
-                    <td>Total cholesterol: <200 mg/dL</td>
-                    <td><180 mg/dL</td>
-                    <td>Dietary changes, exercise</td>
-                </tr>
-                <tr>
-                    <td rowspan="3"><strong>Hormones</strong></td>
-                    <td>Total Testosterone</td>
-                    <td>300-1000 ng/dL</td>
-                    <td>500-800 ng/dL</td>
-                    <td>Lifestyle changes, possible treatment</td>
-                </tr>
-                <tr>
-                    <td>Free Testosterone</td>
-                    <td>9-30 ng/dL</td>
-                    <td>15-25 ng/dL</td>
-                    <td>Monitor SHBG, optimize diet</td>
-                </tr>
-                <tr>
-                    <td>Thyroid Panel (TSH, T3, T4)</td>
-                    <td>TSH: 0.4-4.0 mIU/L</td>
-                    <td>1.0-2.5 mIU/L</td>
-                    <td>Thyroid medication if needed</td>
-                </tr>
-                <tr>
-                    <td rowspan="4"><strong>Vitamins & Minerals</strong></td>
-                    <td>Vitamin D</td>
-                    <td>30-100 ng/mL</td>
-                    <td>50-80 ng/mL</td>
-                    <td>Supplement if <30</td>
-                </tr>
-                <tr>
-                    <td>Vitamin B12</td>
-                    <td>200-900 pg/mL</td>
-                    <td>400-600 pg/mL</td>
-                    <td><strong>Supplement immediately if low</strong></td>
-                </tr>
-                <tr>
-                    <td>Folate</td>
-                    <td>2.7-17.0 ng/mL</td>
-                    <td>6-15 ng/mL</td>
-                    <td>Increase folate intake</td>
-                </tr>
-                <tr>
-                    <td>Iron Studies</td>
-                    <td>Ferritin: 15-150 ng/mL</td>
-                    <td>50-100 ng/mL</td>
-                    <td>Iron supplementation if low</td>
-                </tr>
-            </table>
-
-            <div class="month-header">MONTH 2: FERTILITY-SPECIFIC TESTING</div>
-            
-            <table>
-                <tr>
-                    <th>Fertility Test</th>
-                    <th>Normal Range</th>
-                    <th>Optimal Range</th>
-                    <th>What It Measures</th>
-                    <th>Action if Abnormal</th>
-                </tr>
-                <tr>
-                    <td><strong>Semen Analysis</strong></td>
-                    <td>Volume: 1.5-5.0 mL</td>
-                    <td>2.5-4.0 mL</td>
-                    <td>Overall sperm health</td>
-                    <td>Repeat test, lifestyle changes</td>
-                </tr>
-                <tr>
-                    <td><strong>Sperm Concentration</strong></td>
-                    <td>>15 million/mL</td>
-                    <td>>40 million/mL</td>
-                    <td>Number of sperm per mL</td>
-                    <td>Supplements, reduce heat exposure</td>
-                </tr>
-                <tr>
-                    <td><strong>Sperm Motility</strong></td>
-                    <td>>40% progressive</td>
-                    <td>>60% progressive</td>
-                    <td>Sperm movement quality</td>
-                    <td>CoQ10, exercise optimization</td>
-                </tr>
-                <tr>
-                    <td><strong>Sperm Morphology</strong></td>
-                    <td>>4% normal forms</td>
-                    <td>>8% normal forms</td>
-                    <td>Sperm shape and structure</td>
-                    <td>Antioxidant therapy, diet</td>
-                </tr>
-                <tr>
-                    <td><strong>DNA Fragmentation</strong></td>
-                    <td><20%</td>
-                    <td><15%</td>
-                    <td>Sperm genetic integrity</td>
-                    <td>Stress reduction, antioxidants</td>
-                </tr>
-            </table>
-
-            <div class="month-header">MONTH 3: PROGRESS MONITORING</div>
-            <ul class="checklist">
-                <li>Repeat baseline tests to track improvements</li>
-                <li>Follow-up semen analysis if initial results were suboptimal</li>
-                <li>Check vitamin D, B12, and iron levels again</li>
-                <li>Monitor testosterone and thyroid if initially abnormal</li>
-                <li>Body composition analysis to track muscle/fat changes</li>
-                <li>Assess overall health metrics before conception attempts</li>
-            </ul>
-
-            <h3>Weekly Monitoring at Home</h3>
-            <div class="daily-grid">
-                <div class="day-card">
-                    <div class="day-title">DAILY TRACKING</div>
-                    <div class="workout-item">📊 Weight: Same time daily</div>
-                    <div class="workout-item">😴 Sleep quality: Rate 1-10</div>
-                    <div class="workout-item">💪 Energy level: Rate 1-10</div>
-                    <div class="workout-item">😌 Stress level: Rate 1-10</div>
-                    <div class="workout-item">🍽️ Meal compliance: Yes/No</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">WEEKLY MEASUREMENTS</div>
-                    <div class="workout-item">📏 Waist circumference</div>
-                    <div class="workout-item">🩸 Blood pressure</div>
-                    <div class="workout-item">💓 Resting heart rate</div>
-                    <div class="workout-item">🏃‍♂️ Fitness progress</div>
-                    <div class="workout-item">📝 Overall well-being</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section skincare">
-            <h2>🧴 COMPLETE HAIR & SKIN CARE ROUTINE</h2>
-            
-            <h3>Daily Hair Care Protocol</h3>
-            <table>
-                <tr>
-                    <th>Time</th>
-                    <th>Activity</th>
-                    <th>Products/Method</th>
-                    <th>Duration</th>
-                    <th>Purpose</th>
-                </tr>
-                <tr>
-                    <td><strong>7:00 AM</strong></td>
-                    <td>Scalp massage</td>
-                    <td>Rosemary oil + castor oil blend (1:1 ratio)</td>
-                    <td>8-10 minutes</td>
-                    <td>Improve circulation, DHT blocking</td>
-                </tr>
-                <tr>
-                    <td><strong>6:00 PM</strong></td>
-                    <td>Gentle brushing</td>
-                    <td>Wide-tooth comb or boar bristle brush</td>
-                    <td>3-5 minutes</td>
-                    <td>Distribute natural oils, reduce breakage</td>
-                </tr>
-                <tr>
-                    <td><strong>10:00 PM</strong></td>
-                    <td>Treatment application</td>
-                    <td>Minoxidil 5% (if prescribed) OR natural oil blend</td>
-                    <td>2-3 minutes</td>
-                    <td>Hair growth stimulation</td>
-                </tr>
-            </table>
-
-            <h3>Weekly Hair Care Schedule</h3>
-            <div class="daily-grid">
-                <div class="day-card">
-                    <div class="day-title">MONDAY & THURSDAY</div>
-                    <div class="meal-item">🧴 Ketoconazole shampoo (Nizoral 2%)</div>
-                    <div class="meal-item">💆‍♂️ Deep scalp massage during wash</div>
-                    <div class="meal-item">🕰️ Leave on for 5 minutes before rinsing</div>
-                    <div class="meal-item">💧 Cool water rinse to seal cuticles</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">TUESDAY & FRIDAY</div>
-                    <div class="meal-item">🌿 Gentle sulfate-free shampoo + conditioner</div>
-                    <div class="meal-item">🧅 Onion juice treatment (30 minutes before wash)</div>
-                    <div class="meal-item">🍃 Green tea rinse after conditioning</div>
-                    <div class="meal-item">☕ Coffee grounds scalp scrub (once weekly)</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">WEDNESDAY</div>
-                    <div class="meal-item">🚿 Dry shampoo day (avoid overwashing)</div>
-                    <div class="meal-item">🌀 Derma rolling session (1.5mm, weekly only)</div>
-                    <div class="meal-item">⚠️ Sanitize derma roller before/after use</div>
-                    <div class="meal-item">🩹 Apply healing oil blend after rolling</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">WEEKEND TREATMENT</div>
-                    <div class="meal-item">🥥 Deep conditioning mask with coconut oil</div>
-                    <div class="meal-item">🍯 Honey + cinnamon hair mask</div>
-                    <div class="meal-item">🌶️ Cayenne pepper oil (circulation boost)</div>
-                    <div class="meal-item">💤 Overnight oil treatment (Saturday night)</div>
+                <div class="timeline-item">
+                    <div class="timeline-month">MONTH 3</div>
+                    <div class="timeline-goal">Conception<br>Target achieved</div>
                 </div>
             </div>
 
-            <h3>Anti-Aging Skincare Routine</h3>
-            <div class="daily-grid">
-                <div class="day-card">
-                    <div class="day-title">MORNING ROUTINE (7:30 AM)</div>
-                    <div class="workout-item">1. 🧼 Gentle cleanser (CeraVe Foaming)</div>
-                    <div class="workout-item">2. 🍊 Vitamin C serum (15% L-Ascorbic acid)</div>
-                    <div class="workout-item">3. 💧 Hyaluronic acid serum</div>
-                    <div class="workout-item">4. 🧴 Moisturizer with niacinamide</div>
-                    <div class="workout-item">5. ☀️ Sunscreen SPF 50 (reapply every 3 hours)</div>
-                    <div class="workout-item">6. 💋 Lip balm with SPF</div>
-                </div>
+            <!-- Meal Plan Section -->
+            <div class="section">
+                <h2>🥗 Vegetarian Meal Plan (3-Month Progression)</h2>
                 
-                <div class="day-card">
-                    <div class="day-title">EVENING ROUTINE (9:30 PM)</div>
-                    <div class="workout-item">1. 🛢️ Oil cleanser (if wore sunscreen)</div>
-                    <div class="workout-item">2. 🧼 Gentle foam cleanser</div>
-                    <div class="workout-item">3. 🧬 Retinol 0.25% (start 2x/week, build up)</div>
-                    <div class="workout-item">4. 🧴 Niacinamide 10% (alternate with retinol)</div>
-                    <div class="workout-item">5. 🌙 Rich night moisturizer</div>
-                    <div class="workout-item">6. 👁️ Eye cream for fine lines</div>
+                <div class="month-header">MONTH 1: FOUNDATION PHASE (1,950 calories/day)</div>
+                
+                <table>
+                    <tr>
+                        <th style="width: 15%;">Time</th>
+                        <th style="width: 40%;">Vegetarian Food Items</th>
+                        <th style="width: 25%;">Portions</th>
+                        <th style="width: 20%;">Calories</th>
+                    </tr>
+                    <tr>
+                        <td><strong>6:30 AM</strong><br>Pre-workout</td>
+                        <td>Black coffee + 1 banana</td>
+                        <td>1 cup + 1 medium</td>
+                        <td>110</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8:00 AM</strong><br>Breakfast</td>
+                        <td>
+                            • Paneer bhurji (cottage cheese scramble)<br>
+                            • 1 slice whole grain bread<br>
+                            • 1/2 avocado<br>
+                            • Green tea
+                        </td>
+                        <td>
+                            • 150g paneer<br>
+                            • 1 slice (30g)<br>
+                            • 50g<br>
+                            • 1 cup
+                        </td>
+                        <td>420</td>
+                    </tr>
+                    <tr>
+                        <td><strong>10:30 AM</strong><br>Mid-morning</td>
+                        <td>Mixed nuts (almonds, walnuts) + Apple</td>
+                        <td>20g nuts + 1 medium apple</td>
+                        <td>200</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1:00 PM</strong><br>Lunch</td>
+                        <td>
+                            • Grilled tofu/paneer curry<br>
+                            • Brown rice + dal (lentils)<br>
+                            • Mixed vegetables sabzi<br>
+                            • Olive oil<br>
+                            • Cucumber raita
+                        </td>
+                        <td>
+                            • 150g protein<br>
+                            • 3/4 cup rice + 1/2 cup dal<br>
+                            • 1.5 cups<br>
+                            • 1 tbsp<br>
+                            • 1 cup
+                        </td>
+                        <td>520</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4:00 PM</strong><br>Pre-workout</td>
+                        <td>Greek yogurt + berries + plant protein</td>
+                        <td>150g + 1/2 cup + 1/2 scoop</td>
+                        <td>220</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7:30 PM</strong><br>Dinner</td>
+                        <td>
+                            • Grilled paneer/tempeh<br>
+                            • Quinoa<br>
+                            • Steamed broccoli & bell peppers<br>
+                            • Sweet potato<br>
+                            • Mixed green salad
+                        </td>
+                        <td>
+                            • 150g<br>
+                            • 1/2 cup cooked<br>
+                            • 1 cup<br>
+                            • 100g<br>
+                            • 2 cups
+                        </td>
+                        <td>430</td>
+                    </tr>
+                    <tr>
+                        <td><strong>9:30 PM</strong><br>Evening</td>
+                        <td>Herbal tea + 5 almonds</td>
+                        <td>1 cup + 5 pieces</td>
+                        <td>50</td>
+                    </tr>
+                </table>
+                
+                <div class="alert">
+                    <strong>Daily Totals:</strong> 1,950 calories | Protein: 140g | Carbs: 180g | Fat: 70g<br>
+                    <strong>Water Goal:</strong> 3.5-4 liters throughout the day<br>
+                    <strong>Key Focus:</strong> Complete vegetarian proteins from paneer, tofu, legumes, quinoa
+                </div>
+
+                <div class="month-header">MONTH 2: OPTIMIZATION PHASE (1,800 calories/day)</div>
+                <ul class="checklist">
+                    <li>Reduce portions by 15% across all meals</li>
+                    <li>Increase paneer to 180g at breakfast for more protein</li>
+                    <li>Add plant protein powder twice daily (morning + evening)</li>
+                    <li>Include intermittent fasting: 16:8 protocol 3 days/week</li>
+                    <li>Add hemp seeds and chia seeds to smoothies daily</li>
+                </ul>
+
+                <div class="month-header">MONTH 3: PRE-CONCEPTION PHASE (1,850 calories/day)</div>
+                <ul class="checklist">
+                    <li>Slightly increase calories to support conception readiness</li>
+                    <li>Focus on fertility-boosting foods: walnuts, tomatoes, avocados</li>
+                    <li>Add sprouted legumes and microgreens for extra nutrition</li>
+                    <li>Include fertility-specific spices: turmeric, ginger, cinnamon</li>
+                    <li>Prepare body for active conception attempts</li>
+                </ul>
+
+                <h3>Essential Vegetarian Protein Sources Daily</h3>
+                <div class="daily-grid">
+                    <div class="day-card">
+                        <div class="day-title">COMPLETE PROTEINS</div>
+                        <div class="meal-item">🧀 Paneer: 300g daily (54g protein)</div>
+                        <div class="meal-item">🌱 Quinoa: 1 cup cooked (8g protein)</div>
+                        <div class="meal-item">🥤 Plant protein powder: 1.5 scoops (35g protein)</div>
+                        <div class="meal-item">🥛 Greek yogurt: 150g (15g protein)</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">COMPLEMENTARY PROTEINS</div>
+                        <div class="meal-item">🍛 Rice + Dal combination daily</div>
+                        <div class="meal-item">🥜 Nuts + Seeds: 20g mixed daily</div>
+                        <div class="meal-item">🍞 Whole grain + Nut butter</div>
+                        <div class="meal-item">🥬 Leafy greens for amino support</div>
+                    </div>
                 </div>
             </div>
 
-            <h3>Weekly Specialized Treatments</h3>
-            <table>
-                <tr>
-                    <th>Day</th>
-                    <th>Treatment</th>
-                    <th>Product/Method</th>
-                    <th>Benefits</th>
-                </tr>
-                <tr>
-                    <td><strong>Monday</strong></td>
-                    <td>Chemical Exfoliation</td>
-                    <td>BHA (salicylic acid 2%)</td>
-                    <td>Unclog pores, reduce blackheads</td>
-                </tr>
-                <tr>
-                    <td><strong>Wednesday</strong></td>
-                    <td>Gentle Exfoliation</td>
-                    <td>AHA (glycolic acid 10%)</td>
-                    <td>Cell turnover, smooth texture</td>
-                </tr>
-                <tr>
-                    <td><strong>Friday</strong></td>
-                    <td>Hydrating Mask</td>
-                    <td>Sheet mask or honey mask</td>
-                    <td>Deep hydration, glow</td>
-                </tr>
-                <tr>
-                    <td><strong>Sunday</strong></td>
-                    <td>Deep Cleansing</td>
-                    <td>Clay mask (kaolin or bentonite)</td>
-                    <td>Oil control, pore refinement</td>
-                </tr>
-            </table>
+            <!-- Workout Section -->
+            <div class="section">
+                <h2>💪 12-Week Progressive Workout Plan</h2>
+                
+                <div class="month-header">MONTH 1: FOUNDATION BUILDING (Weeks 1-4)</div>
+                
+                <div class="daily-grid">
+                    <div class="day-card">
+                        <div class="day-title">MONDAY - Upper Body Strength</div>
+                        <div class="workout-item"><strong>Warm-up:</strong> 10 min walk + dynamic stretching</div>
+                        <div class="workout-item"><strong>Push-ups (modified if needed):</strong> 3 sets x 8-12 reps</div>
+                        <div class="workout-item"><strong>Dumbbell rows:</strong> 3 sets x 10-12 reps (10-15kg)</div>
+                        <div class="workout-item"><strong>Shoulder press:</strong> 3 sets x 8-10 reps (8-12kg)</div>
+                        <div class="workout-item"><strong>Bicep curls:</strong> 3 sets x 12-15 reps</div>
+                        <div class="workout-item"><strong>Plank hold:</strong> 3 sets x 30-45 seconds</div>
+                        <div class="workout-item"><strong>Cool-down:</strong> 10 min stretching</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">TUESDAY - Cardio + Core</div>
+                        <div class="workout-item"><strong>Brisk walk/light jog:</strong> 35-40 minutes</div>
+                        <div class="workout-item"><strong>Bicycle crunches:</strong> 3 sets x 15 each side</div>
+                        <div class="workout-item"><strong>Russian twists:</strong> 3 sets x 20 total</div>
+                        <div class="workout-item"><strong>Mountain climbers:</strong> 3 sets x 30 seconds</div>
+                        <div class="workout-item"><strong>Dead bugs:</strong> 3 sets x 10 each side</div>
+                        <div class="workout-item"><strong>Stretching:</strong> 15 minutes full body</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">WEDNESDAY - Lower Body Strength</div>
+                        <div class="workout-item"><strong>Warm-up:</strong> 10 min dynamic stretching</div>
+                        <div class="workout-item"><strong>Bodyweight squats:</strong> 3 sets x 12-15 reps</div>
+                        <div class="workout-item"><strong>Walking lunges:</strong> 3 sets x 10 each leg</div>
+                        <div class="workout-item"><strong>Calf raises:</strong> 3 sets x 15-20 reps</div>
+                        <div class="workout-item"><strong>Glute bridges:</strong> 3 sets x 12-15 reps</div>
+                        <div class="workout-item"><strong>Wall sits:</strong> 3 sets x 30-45 seconds</div>
+                        <div class="workout-item"><strong>Cool-down:</strong> 10 min stretching</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">THURSDAY - Active Recovery</div>
+                        <div class="workout-item"><strong>Swimming:</strong> 30 minutes OR</div>
+                        <div class="workout-item"><strong>Cycling:</strong> 45 minutes OR</div>
+                        <div class="workout-item"><strong>Yoga class:</strong> 60 minutes</div>
+                        <div class="workout-item"><strong>Core work:</strong> 15 minutes light</div>
+                        <div class="workout-item"><strong>Meditation:</strong> 10 minutes</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">FRIDAY - Full Body Circuit</div>
+                        <div class="workout-item"><strong>Warm-up:</strong> 10 min light cardio</div>
+                        <div class="workout-item"><strong>Circuit (3 rounds, 60 sec rest between rounds):</strong></div>
+                        <div class="workout-item">• Burpees: 30 seconds</div>
+                        <div class="workout-item">• Squats: 45 seconds</div>
+                        <div class="workout-item">• Push-ups: 30 seconds</div>
+                        <div class="workout-item">• Plank: 45 seconds</div>
+                        <div class="workout-item">• Jumping jacks: 30 seconds</div>
+                        <div class="workout-item"><strong>Cool-down:</strong> 15 min stretching</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">SATURDAY - Long Cardio</div>
+                        <div class="workout-item"><strong>Nature walk/hike:</strong> 60-75 minutes OR</div>
+                        <div class="workout-item"><strong>Cycling:</strong> 60 minutes OR</div>
+                        <div class="workout-item"><strong>Swimming:</strong> 45 minutes</div>
+                        <div class="workout-item"><strong>Foam rolling:</strong> 15 minutes</div>
+                        <div class="workout-item"><strong>Relaxation:</strong> 20 minutes</div>
+                    </div>
+                </div>
 
-            <h3>Hair Growth & Anti-Aging Supplements</h3>
-            <table>
-                <tr>
-                    <th>Supplement</th>
-                    <th>Dose</th>
-                    <th>Timing</th>
-                    <th>Hair Benefits</th>
-                    <th>Skin Benefits</th>
-                </tr>
-                <tr>
-                    <td><strong>Biotin</strong></td>
-                    <td>5mg daily</td>
-                    <td>With breakfast</td>
-                    <td>Hair strength, reduced breakage</td>
-                    <td>Nail health, skin barrier</td>
-                </tr>
-                <tr>
-                    <td><strong>Collagen Peptides</strong></td>
-                    <td>10g daily</td>
-                    <td>Post-workout or evening</td>
-                    <td>Hair thickness, elasticity</td>
-                    <td>Skin elasticity, wrinkle reduction</td>
-                </tr>
-                <tr>
-                    <td><strong>Saw Palmetto</strong></td>
-                    <td>320mg daily</td>
-                    <td>With dinner</td>
-                    <td>DHT blocker, male pattern baldness</td>
-                    <td>May reduce oily skin</td>
-                </tr>
-                <tr>
-                    <td><strong>MSM</strong></td>
-                    <td>1000mg daily</td>
-                    <td>With lunch</td>
-                    <td>Sulfur for hair growth</td>
-                    <td>Collagen synthesis support</td>
-                </tr>
-            </table>
+                <div class="month-header">MONTH 2: INTERMEDIATE PROGRESSION (Weeks 5-8)</div>
+                <ul class="checklist">
+                    <li>Increase weights by 15-20% for all strength exercises</li>
+                    <li>Add 4th set to major compound movements</li>
+                    <li>Increase cardio duration to 45-50 minutes</li>
+                    <li>Add deadlifts and overhead press with proper form</li>
+                    <li>Include 2 HIIT sessions per week (20 minutes each)</li>
+                    <li>Focus on progressive overload principles</li>
+                </ul>
 
-            <div class="alert">
-                <strong>Professional Treatments to Consider:</strong><br>
-                • <strong>PRP therapy:</strong> Platelet-rich plasma for hair growth (every 3-4 months)<br>
-                • <strong>Microneedling:</strong> Professional treatment for scalp and face<br>
-                • <strong>LED light therapy:</strong> Red light for hair growth, anti-aging<br>
-                • <strong>Chemical peels:</strong> Quarterly professional skin treatments<br>
-                • <strong>Dermatologist consultation:</strong> For prescription treatments if needed
+                <div class="month-header">MONTH 3: ADVANCED PHASE (Weeks 9-12)</div>
+                <ul class="checklist">
+                    <li>Progressive overload: increase weight/reps weekly</li>
+                    <li>Add compound movements: weighted squats, deadlifts</li>
+                    <li>Include 2 HIIT sessions per week (25 minutes each)</li>
+                    <li>Focus on functional movements for daily life</li>
+                    <li>Track performance metrics and strength gains</li>
+                    <li>Prepare for maintenance phase post-conception</li>
+                </ul>
+            </div>
+
+            <!-- Supplements Section -->
+            <div class="section">
+                <h2>💊 Complete Supplement Schedule</h2>
+                
+                <table>
+                    <tr>
+                        <th>Supplement</th>
+                        <th>Dose</th>
+                        <th>Timing</th>
+                        <th>Primary Purpose</th>
+                        <th>Special Notes</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Men's Multivitamin</strong></td>
+                        <td>1 tablet</td>
+                        <td>With breakfast</td>
+                        <td>General health, nutrient gaps</td>
+                        <td>Choose one with folate, not folic acid</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vitamin B12</strong></td>
+                        <td>250 mcg</td>
+                        <td>With breakfast</td>
+                        <td>Energy, nervous system, fertility</td>
+                        <td><strong>Essential for vegetarians</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Algae-based Omega-3</strong></td>
+                        <td>1000mg (EPA 300mg + DHA 500mg)</td>
+                        <td>With lunch</td>
+                        <td>Heart health, sperm quality</td>
+                        <td>Vegetarian source from algae</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vitamin D3</strong></td>
+                        <td>2000-4000 IU</td>
+                        <td>With breakfast</td>
+                        <td>Testosterone, bone health</td>
+                        <td>Test levels first, adjust dose</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zinc Picolinate</strong></td>
+                        <td>15mg</td>
+                        <td>Before bed (empty stomach)</td>
+                        <td>Testosterone, sperm health</td>
+                        <td>Don't take with calcium/iron</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CoQ10 (Ubiquinol)</strong></td>
+                        <td>100mg</td>
+                        <td>With dinner</td>
+                        <td>Sperm motility, cellular energy</td>
+                        <td>Ubiquinol form preferred</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ashwagandha (KSM-66)</strong></td>
+                        <td>300mg</td>
+                        <td>With dinner</td>
+                        <td>Stress reduction, testosterone</td>
+                        <td>KSM-66 extract most effective</td>
+                    </tr>
+                </table>
+                
+                <div class="alert">
+                    <strong>Vegetarian-Specific Notes:</strong><br>
+                    • <strong>B12 is crucial</strong> - vegetarians are at high risk of deficiency<br>
+                    • <strong>Iron absorption:</strong> Take with vitamin C, avoid with tea/coffee<br>
+                    • <strong>Algae omega-3:</strong> Only reliable vegetarian source of EPA/DHA<br>
+                    • <strong>Monthly cost:</strong> ₹4,000-6,000 total
+                </div>
+            </div>
+
+            <!-- Male Fertility Section -->
+            <div class="section">
+                <h2>🍼 Male Fertility Optimization Plan</h2>
+                
+                <div class="cycle-tracker">
+                    <h3>🕐 SPERM DEVELOPMENT TIMELINE</h3>
+                    <p><strong>Key Insight:</strong> Complete sperm production takes 74 days. Your lifestyle changes today will show in sperm quality after 2.5 months!</p>
+                </div>
+
+                <h3>Daily Fertility Optimization Habits</h3>
+                <table>
+                    <tr>
+                        <th>Time</th>
+                        <th>Activity</th>
+                        <th>Method</th>
+                        <th>Fertility Benefit</th>
+                    </tr>
+                    <tr>
+                        <td><strong>6:00 AM</strong></td>
+                        <td>Cold exposure</td>
+                        <td>Cold shower (last 2-3 minutes)</td>
+                        <td>Optimal testicular temperature</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Throughout day</strong></td>
+                        <td>Clothing choices</td>
+                        <td>Loose boxers, breathable fabrics</td>
+                        <td>Better circulation, temperature control</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Work hours</strong></td>
+                        <td>Movement breaks</td>
+                        <td>Stand/walk every 60 minutes</td>
+                        <td>Prevent overheating from sitting</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7:00 PM</strong></td>
+                        <td>Stress management</td>
+                        <td>Meditation, yoga, reading</td>
+                        <td>Lower cortisol, better hormones</td>
+                    </tr>
+                    <tr>
+                        <td><strong>10:30 PM</strong></td>
+                        <td>Sleep optimization</td>
+                        <td>Cool room (65-68°F), dark environment</td>
+                        <td>Optimal hormone production</td>
+                    </tr>
+                </table>
+
+                <h3>Things to Avoid for Optimal Fertility</h3>
+                <ul class="checklist">
+                    <li><strong>Heat exposure:</strong> Laptop on lap >30 min, hot baths >20 min, saunas >15 min</li>
+                    <li><strong>Tight clothing:</strong> Skinny jeans, tight underwear, compression wear daily</li>
+                    <li><strong>Toxins:</strong> Smoking, excessive alcohol (>2 drinks/day), recreational drugs</li>
+                    <li><strong>Chemicals:</strong> BPA plastics, pesticide-heavy foods, harsh cleaning products</li>
+                    <li><strong>Stress:</strong> Chronic work stress, sleep deprivation, excessive exercise</li>
+                    <li><strong>Poor diet:</strong> Processed foods, trans fats, excessive sugar, inflammatory foods</li>
+                </ul>
+            </div>
+
+            <!-- Success Footer -->
+            <div class="success-footer">
+                <h2>🎯 YOUR 3-MONTH SUCCESS MANTRA</h2>
+                <p style="font-size: 1.3rem; margin: 15px 0;"><strong>"Discipline in the next 90 days creates the foundation for my future family. Every choice matters, every day counts."</strong></p>
+                <div class="success-stats">
+                    <div class="success-stat">
+                        <div class="success-stat-value">90 DAYS</div>
+                        <div class="success-stat-label">To Transform</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-value">8-10 KG</div>
+                        <div class="success-stat-label">Weight Loss</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-value">140G</div>
+                        <div class="success-stat-label">Daily Protein</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-value">6 DAYS</div>
+                        <div class="success-stat-label">Weekly Exercise</div>
+                    </div>
+                </div>
+                <p style="margin: 20px 0 0 0; font-size: 1.1rem;">Consistency + Patience + Action = Success! You've got this! 💪</p>
             </div>
         </div>
 
-        <div class="section fertility">
-            <h2>🍼 MALE FERTILITY OPTIMIZATION PLAN</h2>
-            
-            <div class="progress-tracker">
-                <h3>🕐 SPERM DEVELOPMENT TIMELINE</h3>
-                <p><strong>Key Insight:</strong> Complete sperm production takes 74 days. Your lifestyle changes today will show in sperm quality after 2.5 months!</p>
-            </div>
-
-            <h3>Daily Fertility Optimization Habits</h3>
-            <table>
-                <tr>
-                    <th>Time</th>
-                    <th>Activity</th>
-                    <th>Method</th>
-                    <th>Fertility Benefit</th>
-                </tr>
-                <tr>
-                    <td><strong>6:00 AM</strong></td>
-                    <td>Cold exposure</td>
-                    <td>Cold shower (last 2-3 minutes)</td>
-                    <td>Optimal testicular temperature</td>
-                </tr>
-                <tr>
-                    <td><strong>Throughout day</strong></td>
-                    <td>Clothing choices</td>
-                    <td>Loose boxers, breathable fabrics</td>
-                    <td>Better circulation, temperature control</td>
-                </tr>
-                <tr>
-                    <td><strong>Work hours</strong></td>
-                    <td>Movement breaks</td>
-                    <td>Stand/walk every 60 minutes</td>
-                    <td>Prevent overheating from sitting</td>
-                </tr>
-                <tr>
-                    <td><strong>7:00 PM</strong></td>
-                    <td>Stress management</td>
-                    <td>Meditation, yoga, reading</td>
-                    <td>Lower cortisol, better hormones</td>
-                </tr>
-                <tr>
-                    <td><strong>10:30 PM</strong></td>
-                    <td>Sleep optimization</td>
-                    <td>Cool room (65-68°F), dark environment</td>
-                    <td>Optimal hormone production</td>
-                </tr>
-            </table>
-
-            <h3>Fertility-Boosting Foods (Vegetarian Focus)</h3>
-            <div class="daily-grid">
-                <div class="day-card">
-                    <div class="day-title">DAILY MUST-HAVES</div>
-                    <div class="meal-item">🥜 Walnuts: 12-15 pieces (omega-3, zinc)</div>
-                    <div class="meal-item">🍅 Tomatoes: 1 large (lycopene)</div>
-                    <div class="meal-item">🥬 Dark leafy greens: 2 cups (folate)</div>
-                    <div class="meal-item">🥛 Fortified plant milk: 2 glasses (B12)</div>
-                    <div class="meal-item">🥑 Avocado: 1/2 medium (healthy fats)</div>
-                </div>
+        <!-- AKHILA'S SECTION -->
+        <div id="akhila-section" class="content-section akhila-section">
+            <!-- Profile Header -->
+            <div class="profile-header akhila-profile">
+                <div class="profile-avatar akhila-avatar">🌸</div>
+                <h2>AKHILA'S FERTILITY TRANSFORMATION PLAN</h2>
+                <p style="font-size: 1.2rem; color: #666;">Female fertility focus • Hormonal balance • Gentle strength</p>
                 
-                <div class="day-card">
-                    <div class="day-title">WEEKLY ESSENTIALS</div>
-                    <div class="meal-item">🌰 Brazil nuts: 2-3 pieces (selenium)</div>
-                    <div class="meal-item">🧀 Paneer: Daily (complete protein)</div>
-                    <div class="meal-item">🥕 Carrots: Daily (beta-carotene)</div>
-                    <div class="meal-item">🍇 Dark berries: Daily (antioxidants)</div>
-                    <div class="meal-item">🌱 Sprouted legumes: 4-5 times</div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-title">FERTILITY SUPERFOODS</div>
-                    <div class="meal-item">🎃 Pumpkin seeds: 1 tbsp daily (zinc)</div>
-                    <div class="meal-item">🌻 Sunflower seeds: Rich in vitamin E</div>
-                    <div class="meal-item">🌿 Fresh herbs: Cilantro, parsley (detox)</div>
-                    <div class="meal-item">🧄 Garlic & onions: Daily (allicin)</div>
-                    <div class="meal-item">🫖 Green tea: 2-3 cups (antioxidants)</div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">27</div>
+                        <div class="stat-label">Years Old</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">5'5"</div>
+                        <div class="stat-label">Height</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">83 → 65kg</div>
+                        <div class="stat-label">Weight Goal</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1,500 cal</div>
+                        <div class="stat-label">Daily Intake</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">105g</div>
+                        <div class="stat-label">Daily Protein</div>
+                    </div>
                 </div>
             </div>
 
-            <h3>Things to Avoid for Optimal Fertility</h3>
-            <ul class="checklist">
-                <li><strong>Heat exposure:</strong> Laptop on lap >30 min, hot baths >20 min, saunas >15 min</li>
-                <li><strong>Tight clothing:</strong> Skinny jeans, tight underwear, compression wear daily</li>
-                <li><strong>Toxins:</strong> Smoking, excessive alcohol (>2 drinks/day), recreational drugs</li>
-                <li><strong>Chemicals:</strong> BPA plastics, pesticide-heavy foods, harsh cleaning products</li>
-                <li><strong>Stress:</strong> Chronic work stress, sleep deprivation, excessive exercise</li>
-                <li><strong>Poor diet:</strong> Processed foods, trans fats, excessive sugar, inflammatory foods</li>
-            </ul>
-
-            <h3>3-Month Conception Strategy</h3>
-            <div class="daily-grid">
-                <div class="day-card">
-                    <div class="day-title">MONTH 1: Foundation</div>
-                    <div class="workout-item">🔬 Get baseline testing done</div>
-                    <div class="workout-item">🍽️ Establish nutrition routine</div>
-                    <div class="workout-item">💊 Start supplement protocol</div>
-                    <div class="workout-item">🏃‍♂️ Begin exercise program</div>
-                    <div class="workout-item">📊 Track daily habits</div>
+            <!-- Timeline -->
+            <div class="timeline akhila-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-month">MONTH 1</div>
+                    <div class="timeline-goal">Foundation<br>5-6kg loss</div>
                 </div>
-                
-                <div class="day-card">
-                    <div class="day-title">MONTH 2: Optimization</div>
-                    <div class="workout-item">💪 Increase exercise intensity</div>
-                    <div class="workout-item">🧘‍♂️ Master stress management</div>
-                    <div class="workout-item">🔬 Mid-point lab assessment</div>
-                    <div class="workout-item">📈 Track improvements</div>
-                    <div class="workout-item">🎯 Begin cycle tracking with Akhila</div>
+                <div class="timeline-item">
+                    <div class="timeline-month">MONTH 2</div>
+                    <div class="timeline-goal">Optimization<br>6-7kg loss</div>
                 </div>
-                
-                <div class="day-card">
-                    <div class="day-title">MONTH 3: Conception</div>
-                    <div class="workout-item">🎯 Peak health achieved</div>
-                    <div class="workout-item">🗓️ Time intercourse with ovulation</div>
-                    <div class="workout-item">🧘‍♂️ Maintain low stress levels</div>
-                    <div class="workout-item">💊 Continue all supplements</div>
-                    <div class="workout-item">🤞 Begin trying for conception</div>
+                <div class="timeline-item">
+                    <div class="timeline-month">MONTH 3</div>
+                    <div class="timeline-goal">Conception<br>Target achieved</div>
                 </div>
             </div>
 
-            <div class="alert">
-                <strong>Success Metrics for 3-Month Plan:</strong><br>
-                • <strong>Weight loss:</strong> 8-10kg total (target: 75kg)<br>
-                • <strong>Energy levels:</strong> 8-9/10 consistently<br>
-                • <strong>Sleep quality:</strong> 8-9/10 with 7-8 hours nightly<br>
-                • <strong>Stress levels:</strong> <3/10 average<br>
-                • <strong>Exercise consistency:</strong> 6 days/week adherence<br>
-                • <strong>Supplement compliance:</strong> >95% adherence<br>
-                • <strong>Nutrition goals:</strong> 140g protein daily, 1850 calories<br>
-                • <strong>Ready for conception:</strong> Optimal sperm parameters by Month 3
+            <!-- Meal Plan Section -->
+            <div class="section">
+                <h2>🥗 Vegetarian Fertility Meal Plan (3-Month Progression)</h2>
+                
+                <div class="month-header">MONTH 1: FOUNDATION PHASE (1,500 calories/day)</div>
+                
+                <table>
+                    <tr>
+                        <th style="width: 15%;">Time</th>
+                        <th style="width: 40%;">Vegetarian Food Items</th>
+                        <th style="width: 25%;">Portions</th>
+                        <th style="width: 20%;">Calories</th>
+                    </tr>
+                    <tr>
+                        <td><strong>7:00 AM</strong><br>Early morning</td>
+                        <td>Warm lemon water + 5 soaked almonds</td>
+                        <td>1 glass + 5 pieces</td>
+                        <td>40</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8:30 AM</strong><br>Breakfast</td>
+                        <td>
+                            • Protein smoothie (plant protein powder)<br>
+                            • 1 slice whole grain bread with almond butter<br>
+                            • 1/4 avocado<br>
+                            • Herbal tea (folic acid enriched)
+                        </td>
+                        <td>
+                            • 1 scoop + 1 cup almond milk<br>
+                            • 1 slice + 1 tbsp<br>
+                            • 30g<br>
+                            • 1 cup
+                        </td>
+                        <td>350</td>
+                    </tr>
+                    <tr>
+                        <td><strong>10:30 AM</strong><br>Mid-morning</td>
+                        <td>Greek yogurt + mixed berries</td>
+                        <td>100g + 1/2 cup berries</td>
+                        <td>150</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1:00 PM</strong><br>Lunch</td>
+                        <td>
+                            • Paneer/tofu curry<br>
+                            • Quinoa or brown rice<br>
+                            • Large mixed salad<br>
+                            • Olive oil dressing<br>
+                            • Dal (lentils)
+                        </td>
+                        <td>
+                            • 120g protein<br>
+                            • 3/4 cup cooked<br>
+                            • 2 cups<br>
+                            • 1 tsp<br>
+                            • 1/2 cup
+                        </td>
+                        <td>420</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4:00 PM</strong><br>Afternoon</td>
+                        <td>Green smoothie with protein</td>
+                        <td>Spinach + apple + 1/2 scoop protein + almond milk</td>
+                        <td>180</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7:00 PM</strong><br>Dinner</td>
+                        <td>
+                            • Grilled paneer/tempeh<br>
+                            • Sweet potato<br>
+                            • Leafy greens (spinach/kale)<br>
+                            • Healthy fats (tahini/nuts)<br>
+                            • Vegetable soup
+                        </td>
+                        <td>
+                            • 100g<br>
+                            • 80g<br>
+                            • 2 cups<br>
+                            • 1 tbsp<br>
+                            • 1 bowl
+                        </td>
+                        <td>330</td>
+                    </tr>
+                    <tr>
+                        <td><strong>9:00 PM</strong><br>Evening</td>
+                        <td>Chamomile tea + 2 dates</td>
+                        <td>1 cup + 2 pieces</td>
+                        <td>70</td>
+                    </tr>
+                </table>
+                
+                <div class="alert">
+                    <strong>Daily Totals:</strong> 1,540 calories | Protein: 105g | Carbs: 140g | Fat: 50g<br>
+                    <strong>Water Goal:</strong> 2.5-3 liters throughout the day<br>
+                    <strong>Focus:</strong> Complete vegetarian proteins, high folate foods, low glycemic index
+                </div>
+
+                <h3>Fertility-Boosting Foods (Daily Vegetarian Essentials)</h3>
+                <div class="daily-grid">
+                    <div class="day-card">
+                        <div class="day-title">MUST-HAVE DAILY</div>
+                        <div class="meal-item">🥬 Dark leafy greens: 2-3 cups (folate, iron)</div>
+                        <div class="meal-item">🥑 Avocado: 1/4 medium (healthy fats, folate)</div>
+                        <div class="meal-item">🥜 Walnuts: 6-8 pieces (omega-3, zinc)</div>
+                        <div class="meal-item">🫐 Berries: 1 cup (antioxidants, vitamin C)</div>
+                        <div class="meal-item">🥛 Fortified plant milk: 2 servings (B12, calcium)</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">WEEKLY TARGETS</div>
+                        <div class="meal-item">🌱 Flax/chia seeds: Daily (plant omega-3)</div>
+                        <div class="meal-item">🍊 Citrus fruits: Daily (vitamin C, folate)</div>
+                        <div class="meal-item">🍠 Sweet potato: 4-5 times (beta-carotene)</div>
+                        <div class="meal-item">🥕 Carrots: Daily (vitamin A)</div>
+                        <div class="meal-item">🌰 Brazil nuts: 2-3 pieces (selenium)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fertility-Focused Gentle Fitness Plan -->
+            <div class="section">
+                <h2>💪 Fertility-Focused Gentle Fitness Plan</h2>
+                
+                <div class="month-header">MONTH 1: GENTLE FOUNDATION (Weeks 1-4)</div>
+                
+                <div class="daily-grid">
+                    <div class="day-card">
+                        <div class="day-title">MONDAY - Gentle Strength</div>
+                        <div class="workout-item"><strong>Warm-up:</strong> 10 min easy walk + stretching</div>
+                        <div class="workout-item"><strong>Wall push-ups:</strong> 2 sets x 8-10 reps</div>
+                        <div class="workout-item"><strong>Bodyweight squats:</strong> 2 sets x 10-12 reps</div>
+                        <div class="workout-item"><strong>Modified planks:</strong> 2 sets x 20-30 seconds</div>
+                        <div class="workout-item"><strong>Pelvic tilts:</strong> 2 sets x 10 reps</div>
+                        <div class="workout-item"><strong>Gentle stretching:</strong> 15 minutes</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">TUESDAY - Cardio + Core</div>
+                        <div class="workout-item"><strong>Brisk walk:</strong> 30-35 minutes</div>
+                        <div class="workout-item"><strong>Gentle core work:</strong> 15 minutes</div>
+                        <div class="workout-item"><strong>Pelvic floor exercises:</strong> 10 minutes</div>
+                        <div class="workout-item"><strong>Deep breathing:</strong> 10 minutes</div>
+                        <div class="workout-item"><strong>Relaxation:</strong> 10 minutes</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">WEDNESDAY - Fertility Yoga</div>
+                        <div class="workout-item"><strong>Fertility yoga flow:</strong> 45 minutes</div>
+                        <div class="workout-item"><strong>Hip openers:</strong> Focus area</div>
+                        <div class="workout-item"><strong>Gentle twists:</strong> For detox</div>
+                        <div class="workout-item"><strong>Restorative poses:</strong> 15 minutes</div>
+                        <div class="workout-item"><strong>Meditation:</strong> 15 minutes</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">THURSDAY - Low Impact Cardio</div>
+                        <div class="workout-item"><strong>Swimming:</strong> 30 minutes OR</div>
+                        <div class="workout-item"><strong>Stationary cycling:</strong> 35 minutes OR</div>
+                        <div class="workout-item"><strong>Dance workout:</strong> 30 minutes</div>
+                        <div class="workout-item"><strong>Cool-down stretching:</strong> 15 minutes</div>
+                    </div>
+                </div>
+
+                <div class="alert">
+                    <strong>Important Exercise Guidelines for Female Fertility:</strong><br>
+                    • <strong>Intensity:</strong> Keep moderate (able to hold conversation throughout)<br>
+                    • <strong>Temperature:</strong> Avoid overheating, especially during ovulation<br>
+                    • <strong>Cycle awareness:</strong> Adjust intensity based on menstrual cycle phase<br>
+                    • <strong>Listen to body:</strong> Stop immediately if feeling dizzy or unwell<br>
+                    • <strong>Recovery:</strong> Prioritize sleep and stress management over intense exercise
+                </div>
+            </div>
+
+            <!-- Prenatal Vitamins & Supplement Schedule -->
+            <div class="section">
+                <h2>💊 Prenatal Vitamins & Supplement Schedule</h2>
+                
+                <table>
+                    <tr>
+                        <th>Supplement</th>
+                        <th>Dose</th>
+                        <th>Timing</th>
+                        <th>Primary Purpose</th>
+                        <th>Special Notes</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Prenatal Multivitamin</strong></td>
+                        <td>1 tablet</td>
+                        <td>With breakfast</td>
+                        <td>Complete nutrition, folic acid</td>
+                        <td><strong>Start 3 months before trying</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Folic Acid</strong></td>
+                        <td>800 mcg</td>
+                        <td>With breakfast</td>
+                        <td>Neural tube defect prevention</td>
+                        <td><strong>Critical - start immediately</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vitamin B12</strong></td>
+                        <td>250 mcg</td>
+                        <td>With breakfast</td>
+                        <td>Energy, nervous system, fertility</td>
+                        <td><strong>Essential for vegetarians</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Iron (Gentle Formula)</strong></td>
+                        <td>18-27mg</td>
+                        <td>With lunch + Vitamin C</td>
+                        <td>Prevent anemia, support fertility</td>
+                        <td>Take with orange juice, away from tea</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Algae-based Omega-3</strong></td>
+                        <td>1000mg (DHA 500mg + EPA 300mg)</td>
+                        <td>With dinner</td>
+                        <td>Brain development, hormone balance</td>
+                        <td>Vegetarian DHA/EPA source</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coenzyme Q10 (Ubiquinol)</strong></td>
+                        <td>100-200mg</td>
+                        <td>With lunch</td>
+                        <td>Egg quality, cellular energy</td>
+                        <td>Ubiquinol form preferred</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Magnesium Glycinate</strong></td>
+                        <td>300mg</td>
+                        <td>Before bed</td>
+                        <td>Sleep, muscle relaxation, PMS</td>
+                        <td>Helps with menstrual cramps</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Complete Female Fertility Optimization -->
+            <div class="section">
+                <h2>🍼 Complete Female Fertility Optimization</h2>
+                
+                <div class="cycle-tracker">
+                    <h3>🗓️ YOUR MENSTRUAL CYCLE IS YOUR FERTILITY ROADMAP</h3>
+                    <p><strong>Track every detail - your cycle holds the key to successful conception!</strong></p>
+                </div>
+
+                <h3>28-Day Cycle Optimization Strategy</h3>
+                <div class="daily-grid">
+                    <div class="day-card">
+                        <div class="day-title">MENSTRUAL PHASE (Days 1-5)</div>
+                        <div class="workout-item"><strong>🩸 Focus:</strong> Rest, recovery, nourishment</div>
+                        <div class="workout-item"><strong>Exercise:</strong> Gentle yoga, walking only</div>
+                        <div class="workout-item"><strong>Nutrition:</strong> Iron-rich foods, warm meals</div>
+                        <div class="workout-item"><strong>Supplements:</strong> Extra iron, magnesium</div>
+                        <div class="workout-item"><strong>Self-care:</strong> Heating pads, warm baths</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">FOLLICULAR PHASE (Days 6-13)</div>
+                        <div class="workout-item"><strong>🌱 Focus:</strong> Energy building, preparation</div>
+                        <div class="workout-item"><strong>Exercise:</strong> Strength training, cardio</div>
+                        <div class="workout-item"><strong>Nutrition:</strong> Lean proteins, complex carbs</div>
+                        <div class="workout-item"><strong>Supplements:</strong> Regular routine + antioxidants</div>
+                        <div class="workout-item"><strong>Mood:</strong> Rising energy, optimism</div>
+                    </div>
+                    
+                    <div class="day-card ovulation-highlight">
+                        <div class="day-title">OVULATION (Days 14-16)</div>
+                        <div class="workout-item"><strong>🥚 Focus:</strong> PRIME FERTILITY WINDOW</div>
+                        <div class="workout-item"><strong>Exercise:</strong> Light to moderate only</div>
+                        <div class="workout-item"><strong>Nutrition:</strong> Antioxidant-rich foods</div>
+                        <div class="workout-item"><strong>Timing:</strong> Intercourse every other day</div>
+                        <div class="workout-item"><strong>Signs:</strong> Clear mucus, temp rise</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">LUTEAL PHASE (Days 17-28)</div>
+                        <div class="workout-item"><strong>🌙 Focus:</strong> Support potential implantation</div>
+                        <div class="workout-item"><strong>Exercise:</strong> Gentle, stress-reducing</div>
+                        <div class="workout-item"><strong>Nutrition:</strong> Healthy fats, B-vitamins</div>
+                        <div class="workout-item"><strong>Supplements:</strong> Extra B6, magnesium</div>
+                        <div class="workout-item"><strong>Lifestyle:</strong> Prioritize sleep, reduce stress</div>
+                    </div>
+                </div>
+
+                <div class="fertile-window">
+                    <h4>🎯 OPTIMAL CONCEPTION TIMING STRATEGY</h4>
+                    <p><strong>Best days for intercourse:</strong> 3 days before ovulation through 1 day after</p>
+                    <p><strong>Frequency:</strong> Every other day during fertile window (maintains sperm quality)</p>
+                </div>
+
+                <div class="alert">
+                    <strong>🌟 Excellent News:</strong> At 27, you're in the prime fertility years! Your egg quality is excellent, and you have time to optimize your health thoroughly before conception.
+                </div>
+            </div>
+
+            <!-- Success Footer -->
+            <div class="success-footer">
+                <h2>🌸 YOUR FERTILITY AFFIRMATION & SUCCESS PLAN</h2>
+                <p style="font-size: 1.3rem; margin: 15px 0;"><strong>"My body is preparing for the beautiful journey of motherhood. I am patient, I am healthy, I am ready for this blessing."</strong></p>
+                <div class="success-stats">
+                    <div class="success-stat">
+                        <div class="success-stat-value">90 DAYS</div>
+                        <div class="success-stat-label">To Transform</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-value">12-15 KG</div>
+                        <div class="success-stat-label">Weight Loss</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-value">105G</div>
+                        <div class="success-stat-label">Daily Protein</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-value">27 YEARS</div>
+                        <div class="success-stat-label">Prime Fertility</div>
+                    </div>
+                </div>
+                <p style="margin: 20px 0 0 0; font-size: 1.1rem;">Trust your body, track consistently, stay positive. Your baby is waiting for the perfect time! 💕</p>
             </div>
         </div>
 
-        <div style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; padding: 30px; text-align: center; border-radius: 15px; margin-top: 40px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
-            <h2>🎯 YOUR 3-MONTH SUCCESS MANTRA</h2>
-            <p style="font-size: 20px; margin: 15px 0;"><strong>"Discipline in the next 90 days creates the foundation for my future family. Every choice matters, every day counts."</strong></p>
-            <div style="display: flex; justify-content: space-around; margin-top: 20px; flex-wrap: wrap;">
-                <div style="margin: 10px;">
-                    <div style="font-size: 24px; font-weight: bold;">90 DAYS</div>
-                    <div style="font-size: 14px;">To Transform</div>
-                </div>
-                <div style="margin: 10px;">
-                    <div style="font-size: 24px; font-weight: bold;">8-10 KG</div>
-                    <div style="font-size: 14px;">Weight Loss</div>
-                </div>
-                <div style="margin: 10px;">
-                    <div style="font-size: 24px; font-weight: bold;">140G</div>
-                    <div style="font-size: 14px;">Daily Protein</div>
-                </div>
-                <div style="margin: 10px;">
-                    <div style="font-size: 24px; font-weight: bold;">6 DAYS</div>
-                    <div style="font-size: 14px;">Weekly Exercise</div>
+        <!-- SHARED MEAL PREP SECTION -->
+        <div id="shared-section" class="content-section shared-section">
+            <!-- Profile Header -->
+            <div class="profile-header shared-profile">
+                <div class="profile-avatar shared-avatar">💕</div>
+                <h2>SHARED MEAL PREP TRANSFORMATION</h2>
+                <p style="font-size: 1.2rem; color: #666;">Complete meal prep guide for your joint fertility journey</p>
+                
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">3 Months</div>
+                        <div class="stat-label">Transformation</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">245g</div>
+                        <div class="stat-label">Combined Protein</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">18kg</div>
+                        <div class="stat-label">Total Weight Loss</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">6 Days</div>
+                        <div class="stat-label">Weekly Prep</div>
+                    </div>
                 </div>
             </div>
-            <p style="margin: 20px 0 0 0; font-size: 16px;">Consistency + Patience + Action = Success! You've got this! 💪</p>
+
+            <!-- Timeline -->
+            <div class="timeline shared-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-month">WEEK 1-4</div>
+                    <div class="timeline-goal">Foundation<br>Build Habits</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-month">WEEK 5-8</div>
+                    <div class="timeline-goal">Optimization<br>Refine System</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-month">WEEK 9-12</div>
+                    <div class="timeline-goal">Mastery<br>Perfect Routine</div>
+                </div>
+            </div>
+
+            <!-- Daily Meal Schedule -->
+            <div class="section">
+                <h2>🍽️ Daily Meal Schedule - Week 1</h2>
+                
+                <div class="month-header">🌅 BREAKFAST (7:00-8:30 AM) - High Energy Start</div>
+                <div class="meal-grid">
+                    <div class="person-card harish-card">
+                        <h3>💪 HARISH (420 cal)</h3>
+                        <ul>
+                            <li><strong>Paneer Bhurji:</strong> 150g paneer scrambled with spices</li>
+                            <li><strong>Whole Grain Bread:</strong> 1 slice (30g)</li>
+                            <li><strong>Avocado:</strong> 1/2 medium (50g)</li>
+                            <li><strong>Green Tea:</strong> 1 cup</li>
+                        </ul>
+                        <p><strong>Prep:</strong> Batch make paneer bhurji for 3 days</p>
+                    </div>
+                    <div class="person-card akhila-card">
+                        <h3>🌸 AKHILA (350 cal)</h3>
+                        <ul>
+                            <li><strong>Protein Smoothie:</strong> 1 scoop + almond milk</li>
+                            <li><strong>Almond Butter Toast:</strong> 1 slice + 1 tbsp</li>
+                            <li><strong>Avocado:</strong> 1/4 medium (30g)</li>
+                            <li><strong>Folic Acid Tea:</strong> 1 cup</li>
+                        </ul>
+                        <p><strong>Prep:</strong> Blend smoothie fresh daily</p>
+                    </div>
+                </div>
+
+                <div class="month-header">🍛 LUNCH (1:00 PM) - Power Meal</div>
+                <div class="meal-grid">
+                    <div class="person-card harish-card">
+                        <h3>💪 HARISH (520 cal)</h3>
+                        <ul>
+                            <li><strong>Protein:</strong> 150g grilled paneer/tofu curry</li>
+                            <li><strong>Carbs:</strong> 3/4 cup brown rice + 1/2 cup dal</li>
+                            <li><strong>Vegetables:</strong> 1.5 cups mixed sabzi</li>
+                            <li><strong>Sides:</strong> Cucumber raita, olive oil</li>
+                        </ul>
+                        <p><strong>Prep:</strong> Batch cook rice/dal, make curry for 3 days</p>
+                    </div>
+                    <div class="person-card akhila-card">
+                        <h3>🌸 AKHILA (420 cal)</h3>
+                        <ul>
+                            <li><strong>Protein:</strong> 120g paneer/tofu curry</li>
+                            <li><strong>Carbs:</strong> 3/4 cup quinoa/brown rice</li>
+                            <li><strong>Salad:</strong> 2 cups mixed greens</li>
+                            <li><strong>Dal:</strong> 1/2 cup lentils</li>
+                        </ul>
+                        <p><strong>Prep:</strong> Cook quinoa in batch, prepare salad base</p>
+                    </div>
+                </div>
+
+                <div class="month-header">🍽️ DINNER (7:00-7:30 PM) - Light & Nutritious</div>
+                <div class="meal-grid">
+                    <div class="person-card harish-card">
+                        <h3>💪 HARISH (430 cal)</h3>
+                        <ul>
+                            <li><strong>Protein:</strong> 150g grilled paneer/tempeh</li>
+                            <li><strong>Quinoa:</strong> 1/2 cup cooked</li>
+                            <li><strong>Vegetables:</strong> Steamed broccoli & bell peppers</li>
+                            <li><strong>Sweet Potato:</strong> 100g roasted</li>
+                            <li><strong>Salad:</strong> 2 cups mixed greens</li>
+                        </ul>
+                        <p><strong>Prep:</strong> Grill proteins, steam vegetables in batch</p>
+                    </div>
+                    <div class="person-card akhila-card">
+                        <h3>🌸 AKHILA (330 cal)</h3>
+                        <ul>
+                            <li><strong>Protein:</strong> 100g grilled paneer/tempeh</li>
+                            <li><strong>Sweet Potato:</strong> 80g roasted</li>
+                            <li><strong>Leafy Greens:</strong> 2 cups sautéed</li>
+                            <li><strong>Healthy Fats:</strong> 1 tbsp tahini/nuts</li>
+                            <li><strong>Soup:</strong> 1 bowl vegetable</li>
+                        </ul>
+                        <p><strong>Prep:</strong> Make soup in batch, roast sweet potatoes</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Shopping List -->
+            <div class="section">
+                <h2>🛒 Complete Shopping List</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Item</th>
+                            <th>Weekly Quantity</th>
+                            <th>Storage Notes</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="category-produce">
+                            <td rowspan="8"><strong>🥬 FRESH PRODUCE</strong></td>
+                            <td>Bananas</td>
+                            <td>7 pieces</td>
+                            <td>Room temperature, buy twice weekly</td>
+                            <td>High</td>
+                        </tr>
+                        <tr class="category-produce">
+                            <td>Avocados</td>
+                            <td>4 large</td>
+                            <td>Ripen at room temp, then fridge</td>
+                            <td>High</td>
+                        </tr>
+                        <tr class="category-produce">
+                            <td>Mixed Salad Greens</td>
+                            <td>2 large bags</td>
+                            <td>Wash, dry, store in fridge</td>
+                            <td>High</td>
+                        </tr>
+                        <tr class="category-produce">
+                            <td>Spinach (Fresh)</td>
+                            <td>2 bunches</td>
+                            <td>Wash, dry thoroughly</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr class="category-produce">
+                            <td>Broccoli</td>
+                            <td>2 large heads</td>
+                            <td>Fridge crisper, use within 5 days</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr class="category-produce">
+                            <td>Bell Peppers</td>
+                            <td>4 mixed colors</td>
+                            <td>Fridge, use within week</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr class="category-produce">
+                            <td>Sweet Potatoes</td>
+                            <td>6 medium</td>
+                            <td>Cool, dark place</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr class="category-produce">
+                            <td>Mixed Berries</td>
+                            <td>2 containers</td>
+                            <td>Fridge, use within 3-4 days</td>
+                            <td>High</td>
+                        </tr>
+                        
+                        <tr class="category-dairy">
+                            <td rowspan="3"><strong>🥛 DAIRY & ALTERNATIVES</strong></td>
+                            <td>Fresh Paneer</td>
+                            <td>2 kg</td>
+                            <td>Fresh preferred, max 4-5 days</td>
+                            <td>Critical</td>
+                        </tr>
+                        <tr class="category-dairy">
+                            <td>Greek Yogurt (Plain)</td>
+                            <td>1 kg</td>
+                            <td>High protein variety</td>
+                            <td>High</td>
+                        </tr>
+                        <tr class="category-dairy">
+                            <td>Almond Milk (Unsweetened)</td>
+                            <td>2 liters</td>
+                            <td>B12 fortified preferred</td>
+                            <td>High</td>
+                        </tr>
+                        
+                        <tr class="category-grains">
+                            <td rowspan="5"><strong>🌾 GRAINS & LEGUMES</strong></td>
+                            <td>Brown Rice (Organic)</td>
+                            <td>2 kg</td>
+                            <td>Airtight container, bulk buy</td>
+                            <td>Critical</td>
+                        </tr>
+                        <tr class="category-grains">
+                            <td>Quinoa (Tricolor)</td>
+                            <td>1 kg</td>
+                            <td>Rinse before cooking</td>
+                            <td>High</td>
+                        </tr>
+                        <tr class="category-grains">
+                            <td>Whole Grain Bread</td>
+                            <td>2 loaves</td>
+                            <td>Freeze extra slices</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr class="category-grains">
+                            <td>Mixed Dal</td>
+                            <td>1 kg</td>
+                            <td>Variety pack - moong, toor, chana</td>
+                            <td>Critical</td>
+                        </tr>
+                        <tr class="category-grains">
+                            <td>Red/Green Lentils</td>
+                            <td>500g each</td>
+                            <td>For soups and curries</td>
+                            <td>Medium</td>
+                        </tr>
+                        
+                        <tr class="category-protein">
+                            <td rowspan="4"><strong>🥜 PROTEINS & NUTS</strong></td>
+                            <td>Mixed Nuts</td>
+                            <td>500g</td>
+                            <td>Almonds, walnuts - airtight storage</td>
+                            <td>High</td>
+                        </tr>
+                        <tr class="category-protein">
+                            <td>Almond Butter</td>
+                            <td>1 jar</td>
+                            <td>Natural, no added sugar</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr class="category-protein">
+                            <td>Plant Protein Powder</td>
+                            <td>2 containers</td>
+                            <td>Pea/hemp blend preferred</td>
+                            <td>Critical</td>
+                        </tr>
+                        <tr class="category-protein">
+                            <td>Tahini</td>
+                            <td>1 jar</td>
+                            <td>Pure sesame seed paste</td>
+                            <td>Low</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Weekly Meal Prep Timeline -->
+            <div class="section">
+                <h2>📅 Weekly Meal Prep Timeline</h2>
+                
+                <div class="daily-grid">
+                    <div class="day-card">
+                        <div class="day-title">🗓️ SUNDAY - Big Prep Day</div>
+                        <div class="meal-item"><strong>Time:</strong> 2-3 hours</div>
+                        <div class="meal-item">• Batch cook all grains (rice, quinoa)</div>
+                        <div class="meal-item">• Grill proteins for 3 days</div>
+                        <div class="meal-item">• Prep and wash all vegetables</div>
+                        <div class="meal-item">• Make soup bases and dal</div>
+                        <div class="meal-item">• Prepare spice mixes and marinades</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">🗓️ WEDNESDAY - Mid-Week Refresh</div>
+                        <div class="meal-item"><strong>Time:</strong> 45 minutes</div>
+                        <div class="meal-item">• Restock fresh vegetables</div>
+                        <div class="meal-item">• Prep proteins for remaining days</div>
+                        <div class="meal-item">• Fresh smoothie ingredient prep</div>
+                        <div class="meal-item">• Herbal tea blend preparation</div>
+                    </div>
+                    
+                    <div class="day-card">
+                        <div class="day-title">🗓️ DAILY - Quick Assembly</div>
+                        <div class="meal-item"><strong>Time:</strong> 15-20 minutes total</div>
+                        <div class="meal-item">• Morning prep: 15 minutes</div>
+                        <div class="meal-item">• Lunch assembly: 10 minutes</div>
+                        <div class="meal-item">• Dinner prep: 12 minutes</div>
+                        <div class="meal-item">• Snacks: 5 minutes</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Footer -->
+            <div class="success-footer">
+                <h2>🌟 Your 90-Day Success Mantra</h2>
+                <p style="font-size: 1.3rem; margin: 15px 0; font-style: italic;">
+                    "Every meal prepared is a step toward our dreams. We nourish our bodies, strengthen our bond, and prepare for the beautiful journey ahead. Consistency today creates our family tomorrow!"
+                </p>
+                <div class="success-stats">
+                    <div class="success-stat">
+                        <div class="success-stat-value">90</div>
+                        <div class="success-stat-label">Days to Transform</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-value">18kg</div>
+                        <div class="success-stat-label">Total Weight Loss</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-value">245g</div>
+                        <div class="success-stat-label">Combined Daily Protein</div>
+                    </div>
+                    <div class="success-stat">
+                        <div class="success-stat-value">❤️</div>
+                        <div class="success-stat-label">Future Family</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-weight: bold;">Together, you've got this! 💪</p>
+            </div>
         </div>
     </div>
-</body>
-</html>
+
+    <!-- Simple Script Tag - Define Function Immediately -->
+    <script>
+        // Define showSection function IMMEDIATELY
+        window.showSection = function(sectionName) {
+            console.log('showSection called with:', sectionName);
+            
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            const activeSection = document.getElementById(sectionName + '-section');
+            if (activeSection) {
+                activeSection.classList.add('active');
+                console.log('Activated section:', sectionName + '-section');
+            } else {
+                console.error('Section not found:', sectionName + '-section');
+            }
+            
+            // Add active class to clicked tab
+            const activeTab = document.querySelector(`.${sectionName}-tab`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+                console.log('Activated tab:', sectionName + '-tab');
+            } else {
+                console.error('Tab not found:', sectionName + '-tab');
+            }
+        };
+        
+        // Also make it available as showSection for compatibility
+        window.showSection = window.showSection;
+        
+        console.log('showSection function defined successfully');
+    </script>
+
+    <script>
+        // Initialize immediately when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM ready, setting up event listeners...');
+            
+            // Set up click event listeners for tabs
+            const harishBtn = document.getElementById('harish-btn');
+            const akhilaBtn = document.getElementById('akhila-btn');
+            const sharedBtn = document.getElementById('shared-btn');
+            
+            if (harishBtn) {
+                harishBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.showSection('harish');
+                });
+                console.log('Harish button listener added');
+            }
+            
+            if (akhilaBtn) {
+                akhilaBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.showSection('akhila');
+                });
+                console.log('Akhila button listener added');
+            }
+            
+            if (sharedBtn) {
+                sharedBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.showSection('shared');
+                });
+                console.log('Shared button listener added');
+            }
+            
+            // Show default section
+            window.showSection('harish');
+            console.log('Default section loaded');
+        });
+    </script>
+
+    <script>
+        // PWA and other features
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const installBanner = document.getElementById('installBanner');
+            if (installBanner) {
+                installBanner.style.display = 'block';
+            }
+        });
+
+        // Set up install button when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const installBtn = document.getElementById('installBtn');
+            const dismissBtn = document.getElementById('dismissBtn');
+            const installBanner = document.getElementById('installBanner');
+            
+            if (installBtn) {
+                installBtn.addEventListener('click', function() {
+                    if (installBanner) installBanner.style.display = 'none';
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        deferredPrompt.userChoice.then((choiceResult) => {
+                            deferredPrompt = null;
+                        });
+                    }
+                });
+            }
+            
+            if (dismissBtn) {
+                dismissBtn.addEventListener('click', function() {
+                    if (installBanner) installBanner.style.display = 'none';
+                });
+            }
+        });
+
+        // Online/Offline Status
+        function updateOnlineStatus() {
+            const offlineIndicator = document.getElementById('offlineIndicator');
+            if (!offlineIndicator) return;
+            
+            if (navigator.onLine) {
+                offlineIndicator.textContent = '📡 You\'re online!';
+                offlineIndicator.className = 'offline-indicator online-indicator';
+                offlineIndicator.style.display = 'block';
+                setTimeout(() => {
+                    offlineIndicator.style.display = 'none';
+                }, 3000);
+            } else {
+                offlineIndicator.textContent = '📡 You\'re offline - app still works!';
+                offlineIndicator.className = 'offline-indicator';
+                offlineIndicator.style.display = 'block';
+            }
+        }
+
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+
+        // Additional features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Touch support
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case '1':
+                            e.preventDefault();
+                            window.showSection('harish');
+                            break;
+                        case '2':
+                            e.preventDefault();
+                            window.showSection('akhila');
+                            break;
+                        case '3':
+                            e.preventDefault();
+                            window.showSection('shared');
+                            break;
+                    }
+                }
+            });
+            
+            console.log('App fully initialized!');
+        });
